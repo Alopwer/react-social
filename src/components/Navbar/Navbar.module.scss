@@ -1,0 +1,27 @@
+.nav {
+    grid-area: n;
+    background: rgb(255, 180, 75);
+}
+.menu {
+    list-style: none;
+}
+.item {
+    padding: 10px 0 5px 10px;
+    &:first-child {
+        padding-top: 15px;
+    }
+    &:last-child {
+        padding-bottom: 15px;
+    }
+}
+.link {
+    text-decoration: none;
+    color: rgb(130, 70, 0);
+    &:hover {
+        color: rgb(150, 100, 54);
+        text-decoration: underline;
+    }
+    &_active {
+        color: rgb(150, 100, 54);
+    }
+}

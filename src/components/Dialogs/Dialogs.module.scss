@@ -1,0 +1,21 @@
+.dialogs {
+    background: rgb(255, 228, 139);
+    display: flex;
+    padding: 10px 15px;
+    &-items {
+        padding-right: 50px;
+        border-right: 1px solid rgba(0, 0, 0, 0.5);
+    }
+}
+
+.item {
+    padding-bottom: 10px;
+}
+
+.messages {
+    margin-left: 50px;
+}
+
+.message {
+    padding-bottom: 8px;
+}
