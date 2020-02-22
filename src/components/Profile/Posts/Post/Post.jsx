@@ -1,6 +1,6 @@
 import React from 'react'
 import s from './Post.module.scss'
-import avatar from '../../../../static/avatar.png'
+import avatar from '../../../../assets/avatar.png'
 
 const Post = ({ message, likes }) => {
     return (

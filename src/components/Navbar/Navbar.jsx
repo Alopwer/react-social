@@ -35,6 +35,15 @@ const Navbar = (props) => {
 				</li>
 				<li className={s.item}>
 					<NavLink
+						to="/users"
+						className={s.link}
+						activeClassName={s["link_active"]}
+					>
+						Users
+					</NavLink>
+				</li>
+				<li className={s.item}>
+					<NavLink
 						to="/news"
 						className={s.link}
 						activeClassName={s["link_active"]}

@@ -1,39 +1,45 @@
 import React from 'react';
-import userAvatar from '../../static/user-avatar.png'
 import s from './Users.module.scss'
-import Axios from 'axios';
+import { NavLink } from 'react-router-dom'
+import avatar from '../../assets/user-avatar.png'
 
 const Users = (props) => {
-   
-    if (props.users.length === 0) {
-        Axios.get('https://gitlab.com/api/v4/users?private_token=JsoMykLmKyRfeLsztCpS')
-        .then(response => response.data)
-        .then(data => data.map(item => ({...item, followed : false})))
-        .then(data => props.setUsers(data))
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+    let pages = []
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i)
     }
 
     return (
         <div className="">
-            {
-                props.users.map(u => <div key={u.id}>
-                    <div>
-                        <img src={u.avatar_url} alt=""/>
-                        { u.followed 
-                            ? <button onClick={() => props.unfollow(u.id)}>Unfollow</button> 
-                            : <button onClick={() => props.follow(u.id)}>Follow</button> }
-                    </div>
-                    <div>
+            <div className="">
+                {
+                    pages.map(p => <span onClick={() => props.onPageChanged(p)} key={p} className={props.currentPage === p && s['selected-page']}>{p}</span>)
+                }
+            </div>
+            <div className="">
+                {
+                    props.users.map(u => <div key={u.id}>
                         <div>
-                            <div>{u.name}</div>
-                            <div>{u.username}</div>
+                            <NavLink to={`/profile/${u.id}`}>
+                                <img src={avatar} alt="" />
+                            </NavLink>
+                            {u.followed
+                                ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => props.follow(u.id)}>Unfollow</button>
+                                : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => props.unfollow(u.id)}>Follow</button>}
                         </div>
                         <div>
-                            {/* <div>{u.location.city}</div>
-                            <div>{u.location.contry}</div> */}
+                            <div>
+                                <div>{u.name}</div>
+                            </div>
+                            <div>
+                                {/* <div>{u.location.city}</div>
+                                <div>{u.location.contry}</div> */}
+                            </div>
                         </div>
-                    </div>
-                </div>)
-            }
+                    </div>)
+                }
+            </div>
         </div>
     )
 }
